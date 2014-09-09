@@ -47,9 +47,10 @@ class twemproxy::install (
 
   # Download sources from github
   exec { 'download_twemproxy_src':
-    command     => "wget $download_url -O $download_archive",
-    cwd         => "/usr/local/src",
-    creates     => "$prefix/$download_archive",
+    command => "wget $download_url -O $download_archive",
+    cwd     => "/usr/local/src",
+    creates => "$prefix/$download_archive",
+    onlyif  => "test ! -f /usr/local/src/$download_archive",
   }
 
   # Untar the nutcracker file.
